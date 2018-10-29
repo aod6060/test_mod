@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"c",
+		"c",
+		"s"
+	],
+	"key": {
+		"c": {
+			"item": "test:burnt_crystal"
+		},
+		"s": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "test:burnt_crystal_sword"
+	}
+}

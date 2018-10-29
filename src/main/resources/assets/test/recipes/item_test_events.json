@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" c ",
+		"cbc",
+		" c "
+	],
+	"key": {
+		"c": {
+			"item": "test:crystal"
+		},
+		"b": {
+			"item": "test:burnt_crystal"
+		}
+	},
+	"result": {
+		"item": "test:item_test_events"
+	}
+}
