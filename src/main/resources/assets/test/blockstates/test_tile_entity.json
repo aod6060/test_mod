@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"normal": {
+			"model": "test:test_tile_entity"
+		}
+	}
+}

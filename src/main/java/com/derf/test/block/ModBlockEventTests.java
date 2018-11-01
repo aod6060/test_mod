@@ -1,5 +1,8 @@
 package com.derf.test.block;
 
+import com.derf.test.Logger;
+import com.derf.test.util.TextCompFactory;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -24,7 +27,10 @@ public class ModBlockEventTests extends ModBlock {
 			World world, 
 			BlockPos pos, 
 			IBlockState state) {
-		
+		if(!world.isRemote)
+		{
+			Logger.getLogger().info("OnBlockDestroyByPlayer: " + pos);
+		}
 		super.onBlockDestroyedByPlayer(world, pos, state);
 	}
 
@@ -33,6 +39,11 @@ public class ModBlockEventTests extends ModBlock {
 			World world, 
 			BlockPos pos, 
 			IBlockState state) {
+		
+		if(!world.isRemote)
+		{
+			Logger.getLogger().info("OnBlockAdded: " + pos);
+		}
 		super.onBlockAdded(world, pos, state);
 	}
 
@@ -41,6 +52,11 @@ public class ModBlockEventTests extends ModBlock {
 			World world, 
 			BlockPos pos, 
 			Explosion explosionIn) {
+		
+		if(!world.isRemote)
+		{
+			Logger.getLogger().info("OnBlockDestroyedByExplosion: " + pos);
+		}
 		super.onBlockDestroyedByExplosion(world, pos, explosionIn);
 	}
 
@@ -49,29 +65,47 @@ public class ModBlockEventTests extends ModBlock {
 			World world, 
 			BlockPos pos, 
 			IBlockState state, 
-			EntityPlayer playerIn,
+			EntityPlayer player,
 			EnumHand hand, 
 			EnumFacing facing, 
 			float hitX, 
 			float hitY, 
 			float hitZ) {
-		return super.onBlockActivated(world, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+		
+		if(!world.isRemote)
+		{
+			player.sendMessage(TextCompFactory.createTCS("OnBlockActivated: " + pos));
+			Logger.getLogger().info("OnBlockActivated: " + pos);
+		}
+		return super.onBlockActivated(world, pos, state, player, hand, facing, hitX, hitY, hitZ);
 	}
 
 	@Override
 	public void onEntityWalk(
 			World world, 
 			BlockPos pos, 
-			Entity entityIn) {
-		super.onEntityWalk(world, pos, entityIn);
+			Entity entity) {
+		
+		if(!world.isRemote)
+		{
+			entity.sendMessage(TextCompFactory.createTCS("OnEntityWalk: " + pos));
+			Logger.getLogger().info("OnEntityWalk: " + pos);
+		}
+		super.onEntityWalk(world, pos, entity);
 	}
 
 	@Override
 	public void onBlockClicked(
 			World world, 
 			BlockPos pos, 
-			EntityPlayer playerIn) {
-		super.onBlockClicked(world, pos, playerIn);
+			EntityPlayer player) {
+		
+		if(!world.isRemote)
+		{
+			player.sendMessage(TextCompFactory.createTCS("OnBlockClicked: " + pos));
+			Logger.getLogger().info("OnBlockClicked: " + pos);
+		}
+		super.onBlockClicked(world, pos, player);
 	}
 
 	@Override
@@ -79,8 +113,14 @@ public class ModBlockEventTests extends ModBlock {
 			World world, 
 			BlockPos pos, 
 			IBlockState state, 
-			Entity entityIn) {
-		super.onEntityCollidedWithBlock(world, pos, state, entityIn);
+			Entity entity) {
+		
+		if(!world.isRemote)
+		{
+			entity.sendMessage(TextCompFactory.createTCS("OnEntityCollidedWithBlock: " + pos));
+			Logger.getLogger().info("OnEntityCollidedWithBlock: " + pos);
+		}
+		super.onEntityCollidedWithBlock(world, pos, state, entity);
 	}
 
 	@Override
@@ -90,6 +130,11 @@ public class ModBlockEventTests extends ModBlock {
 			IBlockState state, 
 			EntityLivingBase placer,
 			ItemStack stack) {
+		if(!world.isRemote)
+		{
+			placer.sendMessage(TextCompFactory.createTCS("OnBlockPlacedBy: " + pos));
+			Logger.getLogger().info("OnBlockPlacedBy: " + pos);
+		}
 		super.onBlockPlacedBy(world, pos, state, placer, stack);
 	}
 
@@ -97,16 +142,26 @@ public class ModBlockEventTests extends ModBlock {
 	public void onFallenUpon(
 			World world, 
 			BlockPos pos, 
-			Entity entityIn, 
+			Entity entity, 
 			float fallDistance) {
-		super.onFallenUpon(world, pos, entityIn, fallDistance);
+		if(!world.isRemote)
+		{
+			entity.sendMessage(TextCompFactory.createTCS("OnFallenUpon: " + pos));
+			Logger.getLogger().info("OnFallenUpon: " + pos);
+		}
+		super.onFallenUpon(world, pos, entity, fallDistance);
 	}
 
 	@Override
 	public void onLanded(
 			World world, 
-			Entity entityIn) {
-		super.onLanded(world, entityIn);
+			Entity entity) {
+		if(!world.isRemote)
+		{
+			entity.sendMessage(TextCompFactory.createTCS("OnLanded: "));
+			Logger.getLogger().info("OnLanded: ");
+		}
+		super.onLanded(world, entity);
 	}
 
 	@Override
@@ -115,6 +170,12 @@ public class ModBlockEventTests extends ModBlock {
 			BlockPos pos, 
 			IBlockState state, 
 			EntityPlayer player) {
+		
+		if(!world.isRemote)
+		{
+			player.sendMessage(TextCompFactory.createTCS("OnBlockHarvested: " + pos));
+			Logger.getLogger().info("OnBlockHarvested: " + pos);
+		}
 		super.onBlockHarvested(world, pos, state, player);
 	}
 
@@ -140,6 +201,9 @@ public class ModBlockEventTests extends ModBlock {
 			IBlockAccess world, 
 			BlockPos pos, 
 			BlockPos neighbor) {
+		
+		Logger.getLogger().info("OnNeighborChange: pos=" + pos + ", neighbor=" + neighbor);
+		
 		super.onNeighborChange(world, pos, neighbor);
 	}
 

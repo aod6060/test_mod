@@ -6,11 +6,18 @@ import java.util.List;
 import com.derf.test.Loader;
 import com.derf.test.item.ModItem;
 import com.derf.test.item.ModItemAxe;
+import com.derf.test.item.ModItemBlockExploder;
 import com.derf.test.item.ModItemHoe;
+import com.derf.test.item.ModItemMobInstantKill;
 import com.derf.test.item.ModItemPickaxe;
 import com.derf.test.item.ModItemSpade;
+import com.derf.test.item.ModItemPortableSpawner;
 import com.derf.test.item.ModItemSword;
+import com.derf.test.item.ModItemTeleporterController;
 import com.derf.test.item.ModItemTestEvents;
+import com.derf.test.item.ModItemThrowMagnet;
+import com.derf.test.item.ModItemThrowMagnetAnimal;
+import com.derf.test.item.ModItemThrowMagnetMobs;
 import com.derf.test.item.ModToolMaterials;
 
 import net.minecraft.item.Item;
@@ -39,6 +46,20 @@ public class ModItems
 	public static final ModItemSword BURNT_CRYSTAL_SWORD = null;
 	// Item Test Events
 	public static final ModItemTestEvents ITEM_TEST_EVENTS = null;
+	// Block Exploder
+	public static final ModItemBlockExploder BLOCK_EXPLODER = null;
+	// Throw Magnet
+	public static final ModItemThrowMagnet THROW_MAGNET = null;
+	// Throw Magnet Mobs
+	public static final ModItemThrowMagnetMobs THROW_MAGNET_MOBS = null;
+	// Mob Instant Kill
+	public static final ModItemMobInstantKill MOB_INSTANT_KILL = null;
+	// Throw Magnet Animal
+	public static final ModItemThrowMagnetAnimal THROW_MAGNET_ANIMAL = null;
+	// Spawner Rand Animal
+	public static final ModItemPortableSpawner PORTABLE_SPAWNER = null;
+	// Teleporter Controller
+	public static final ModItemTeleporterController TELEPORTER_CONTROLLER = null;
 	
 	public static List<Item> getItems()
 	{
@@ -50,8 +71,24 @@ public class ModItems
 				BURNT_CRYSTAL_AXE,
 				BURNT_CRYSTAL_HOE,
 				BURNT_CRYSTAL_SWORD,
-				ITEM_TEST_EVENTS
+				ITEM_TEST_EVENTS,
+				BLOCK_EXPLODER,
+				THROW_MAGNET,
+				THROW_MAGNET_MOBS,
+				MOB_INSTANT_KILL,
+				THROW_MAGNET_ANIMAL,
+				PORTABLE_SPAWNER,
+				TELEPORTER_CONTROLLER
 		);
+	}
+	
+	public static void initStage() {
+		THROW_MAGNET.addItem(THROW_MAGNET);
+		THROW_MAGNET.addItem(THROW_MAGNET_MOBS);
+		THROW_MAGNET.addItem(THROW_MAGNET_ANIMAL);
+		THROW_MAGNET.addItem(MOB_INSTANT_KILL);
+		THROW_MAGNET.addItem(PORTABLE_SPAWNER);
+		
 	}
 	
 	@Mod.EventBusSubscriber
@@ -68,7 +105,14 @@ public class ModItems
 					new ModItemAxe("burnt_crystal_axe", ModToolMaterials.BURNT_TOOL_MATERIAL, 20.0f, 20.0f),
 					new ModItemHoe("burnt_crystal_hoe", ModToolMaterials.BURNT_TOOL_MATERIAL),
 					new ModItemSword("burnt_crystal_sword", ModToolMaterials.BURNT_TOOL_MATERIAL),
-					new ModItemTestEvents()
+					new ModItemTestEvents(),
+					new ModItemBlockExploder(),
+					new ModItemThrowMagnet(),
+					new ModItemThrowMagnetMobs(),
+					new ModItemMobInstantKill(),
+					new ModItemThrowMagnetAnimal(),
+					new ModItemPortableSpawner(),
+					new ModItemTeleporterController()
 			};
 			
 			final IForgeRegistry<Item> registry = e.getRegistry();

@@ -24,6 +24,7 @@ public class ProxyCommon implements IProxy {
 	{
 		//System.out.println("Common Proxy Init");
 		Logger.getLogger().info("Common Proxy Init");
+		ModItems.initStage();
 		ModBlocks.initStage();
 		ModCreativeTabs.create();
 		ModCreativeTabs.register();
